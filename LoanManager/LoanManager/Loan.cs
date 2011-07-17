@@ -14,14 +14,14 @@ namespace LoanManager
     {
         private String _name;
         private DateTime _startDate;
-        private float _APR;
-        private float _principle;
-        private float _numMonths;
+        private double _APR;
+        private double _principle;
+        private double _numMonths;
        
         private ArrayList _paymentHistory;
 
-        private float _principlePaid;
-        private float _interestPaid;
+        private double _principlePaid;
+        private double _interestPaid;
 
         public Loan()
         {
@@ -29,7 +29,7 @@ namespace LoanManager
         }
 
 
-        public Loan(String name, DateTime startDate, float APR, float principle, float numMonths)
+        public Loan(String name, DateTime startDate, double APR, double principle, double numMonths)
         {
             _name = name;
             _startDate = startDate;
@@ -54,19 +54,19 @@ namespace LoanManager
             set { _startDate = value; }
         }
 
-        public float APR
+        public double APR
         {
             get { return _APR;  }
             set { _APR = value; }
         }
 
-        public float Principle
+        public double Principle
         {
             get { return _principle;  }
             set { _principle = value; }
         }
 
-        public float NumMonths
+        public double NumMonths
         {
             get { return _numMonths;  }
             set { _numMonths = value; }

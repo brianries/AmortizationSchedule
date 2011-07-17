@@ -9,17 +9,17 @@ namespace LoanManager
     public class LoanPayment
     {
         private DateTime _time;
-        private float _payment;
-        private float _interestPaid;
-        private float _principlePaid;
-        private float _extraPaid;
+        private double _payment;
+        private double _interestPaid;
+        private double _principlePaid;
+        private double _extraPaid;
 
         public LoanPayment()
         {
             //Default Constructor
         }
 
-        public LoanPayment(float payment, float interestPaid, float principlePaid, float extraPaid)
+        public LoanPayment(double payment, double interestPaid, double principlePaid, double extraPaid)
         {
             _time = DateTime.Now;
             _payment = payment;
@@ -34,25 +34,25 @@ namespace LoanManager
             set { _time = value; }
         }
 
-        public float TotalPayment
+        public double TotalPayment
         {
             get { return _payment; }
             set { _payment = value; }
         }
 
-        public float InterestPaid
+        public double InterestPaid
         {
             get { return _interestPaid; }
             set { _interestPaid = value; }
         }
 
-        public float PrinciplePaid
+        public double PrinciplePaid
         {
             get { return _principlePaid; }
             set { _principlePaid = value; }
         }
 
-        public float ExtraPaid
+        public double ExtraPaid
         {
             get { return _extraPaid; }
             set { _extraPaid = value; }

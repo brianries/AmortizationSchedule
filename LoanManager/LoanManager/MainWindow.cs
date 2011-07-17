@@ -23,21 +23,21 @@ namespace LoanManager
 
         public void TestAmortization()
         {
-            float result = AmortizationSchedule.getInstance().calculateMonthlyPayment(360, 4.5f, 200000.0f);
+            double result = AmortizationSchedule.getInstance().calculateMonthlyPayment(360, 4.5f, 200000.0f);
 
             Console.WriteLine("Monthly payment = {0}", result);
 
 
-            AmortizationSchedule.getInstance().getSchedule(360, 4.5f, 200000.0f);
+            AmortizationSchedule.getInstance().getSchedule(360, 4.5, 200000.0);
 
 
-            Console.WriteLine("Principle for 1058.42, at 4.5% over 30 years = {0}", AmortizationSchedule.getInstance().calculatePrinciple(360, 4.875f, 1058.42f));
+            Console.WriteLine("Principle for 1058.42, at 4.5% over 30 years = {0}", AmortizationSchedule.getInstance().calculatePrinciple(360, 4.875, 1058.42));
 
-            Console.WriteLine("APR for 1058.42, for 200,0000 over 30 years = {0}", AmortizationSchedule.getInstance().calculateAPR(360, 200000, 1058.42f));
+            Console.WriteLine("APR for 1058.42, for 200,0000 over 30 years = {0}", AmortizationSchedule.getInstance().calculateAPR(360, 200000, 1058.42));
 
-            Loan loan = new Loan("House Loan", new DateTime(2011, 6, 29), 4.5f, 2000000.0f, 360.0f);
+            Loan loan = new Loan("House Loan", new DateTime(2011, 6, 29), 4.5, 2000000.0, 360.0);
 
-            LoanPayment payment = new LoanPayment(1500.0f, 1100.0f, 400.0f, 0.0f);
+            LoanPayment payment = new LoanPayment(1500.0, 1100.0, 400.0, 0.0);
 
             loan.addPayment(payment);
 
@@ -69,6 +69,13 @@ namespace LoanManager
             //ReadStream.Close();
 
 
+
+        }
+
+        private void amortizationCalculatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CalculatorWindow calc = new CalculatorWindow();
+            calc.ShowDialog();
 
         }
     }

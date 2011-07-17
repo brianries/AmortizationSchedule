@@ -6,3 +6,13 @@ C:\Users\Brian\documents\visual studio 2010\Projects\LoanManager\LoanManager\bin
 C:\Users\Brian\documents\visual studio 2010\Projects\LoanManager\LoanManager\bin\Debug\LoanManager.pdb
 C:\Users\Brian\documents\visual studio 2010\Projects\LoanManager\LoanManager\obj\x86\Debug\LoanManager.exe
 C:\Users\Brian\documents\visual studio 2010\Projects\LoanManager\LoanManager\obj\x86\Debug\LoanManager.pdb
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\LoanManager.exe
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\LoanManager.pdb
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\bin\Debug\LoanManager.exe
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\bin\Debug\LoanManager.pdb
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\LoanManager.Properties.Resources.resources
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\LoanManager.MainWindow.resources
+C:\Users\Brian\AmortizationSchedule\LoanManager\LoanManager\obj\x86\Debug\LoanManager.CalculatorWindow.resources

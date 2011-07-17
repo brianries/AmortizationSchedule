@@ -12,7 +12,7 @@ namespace LoanManager
 
         private AmortizationSchedule()
         {
-
+            
         }
 
         public static AmortizationSchedule getInstance()
@@ -25,49 +25,80 @@ namespace LoanManager
             return scheduler;
         }
 
-        public static float getMonthlyInterestRate(float yearlyAPR)
+        private static double getMonthlyInterestRate(double yearlyAPR)
         {
-            return yearlyAPR / 100.0f / 12.0f;
+            return yearlyAPR / 100.0 / 12.0;
         }
 
-        public ArrayList getSchedule(int months, float yearlyAPR, float principle)
+        private static double roundToNearestPenny(double value)
+        {
+            //Round the result to the nearest penny
+            double scaled = value * 100.0;
+            scaled += 0.5;
+            int rounded = (int)scaled;
+            return ( (double)rounded / 100.0);
+        }
+
+        public ArrayList getSchedule(int months, double yearlyAPR, double principle)
         {
             ArrayList list = new ArrayList();
 
-            float monthlyPayment = calculateMonthlyPayment(months, yearlyAPR, principle);
-            float remainingPrinciple = principle;
-            float monthlyRate = getMonthlyInterestRate(yearlyAPR);
+            double monthlyPayment = calculateMonthlyPayment(months, yearlyAPR, principle);
+            double remainingPrinciple = principle;
+            double monthlyRate = getMonthlyInterestRate(yearlyAPR);
 
             for (int i = 0; i < months; i++)
             {
-                float interestPaid = monthlyRate * remainingPrinciple;
-                float principlePaid = monthlyPayment - interestPaid;
-                float extraPaid = 0;
-                LoanPayment payment = new LoanPayment(monthlyPayment, interestPaid, principlePaid, extraPaid);
+                //Round to the nearest penny
+                double interestPaid = monthlyRate * remainingPrinciple;
+                interestPaid = (double)roundToNearestPenny((double)interestPaid);
 
+                //Remainder of the payment is principle
+                double principlePaid = monthlyPayment - interestPaid;
+
+                //Any extra paid on top of the monthly payment
+                double extraPaid = 0;
+
+                //Create a payment with these values
+                LoanPayment payment = new LoanPayment(monthlyPayment+extraPaid, interestPaid, principlePaid, extraPaid);
+
+                //Add the payment to the list
                 list.Add(payment);
 
-                Console.WriteLine("{0}: {1}", i, payment);
-
+                //Adjust the remaining principle on the loan
                 remainingPrinciple -= principlePaid;
             }
 
-            float principleSum = 0;
+            remainingPrinciple = roundToNearestPenny(remainingPrinciple);
+
+            //Tack on the remainder on the last payment
+            LoanPayment lastPayment = (LoanPayment)list[months - 1];
+            lastPayment.TotalPayment += remainingPrinciple;
+            lastPayment.PrinciplePaid += remainingPrinciple;
+
+            double principleSum = 0;
+            int num = 0;
             foreach (LoanPayment payment in list)
             {
+                num++;
+                Console.WriteLine("{0}: {1}", num, payment);
                 principleSum += payment.PrinciplePaid;
             }
+
+            Console.WriteLine("Principle to be paid = {0}", principle);
+
+            Console.WriteLine("Remaining Principle = {0}", remainingPrinciple);
 
             Console.WriteLine("Total principle paid = {0}", principleSum);
 
             return list;
         }
 
-        public float calculateMonthlyPayment(int months, float yearlyAPR, float principle)
+        public double calculateMonthlyPayment(int months, double yearlyAPR, double principle)
         {
-            double P = (double)principle;
-            double N = (double)months;
-            double I = (double)getMonthlyInterestRate(yearlyAPR);
+            double P = principle;
+            double N = months;
+            double I = getMonthlyInterestRate(yearlyAPR);
 
             double raised = Math.Pow((1.0 + I), N);
 
@@ -76,14 +107,17 @@ namespace LoanManager
       
             double result = P * (numerator / denominator);
 
-            return (float)result;
+
+            double rounded = roundToNearestPenny(result);
+
+            return rounded;
         }
 
-        public float calculatePrinciple(int months, float yearlyAPR, float monthlyPayment)
+        public double calculatePrinciple(int months, double yearlyAPR, double monthlyPayment)
         {
-            double M = (double)monthlyPayment;
-            double N = (double)months;
-            double I = (double)getMonthlyInterestRate(yearlyAPR);
+            double M = monthlyPayment;
+            double N = months;
+            double I = getMonthlyInterestRate(yearlyAPR);
 
             double raised = Math.Pow((1.0 + I), N);
 
@@ -92,32 +126,32 @@ namespace LoanManager
 
             double result = M * (denominator / numerator);
 
-            return (float)result;
+            return result;
         }
 
-        public float calculateAPR(int months, float principle, float monthlyPayment)
+        public double calculateAPR(int months, double principle, double monthlyPayment)
         {
-            float startVal = 0.0f;
-            float endVal   = 100.0f;
+            double startVal = 0.0;
+            double endVal = 100.0;
 
             return recursiveSearch(startVal, endVal, monthlyPayment, months, principle, 0);
         }
 
-        private float recursiveSearch(float startVal, float endVal, float desiredVal, int months, float principle, int depth)
+        private double recursiveSearch(double startVal, double endVal, double desiredVal, int months, double principle, double depth)
         {
             //Error tolerance
-            float eps = 0.005f;
+            double eps = 0.005;
 
             if ( ((endVal - startVal) < eps) || depth > 30)
             {
-                return (endVal + startVal) / 2.0f;
+                return (endVal + startVal) / 2.0;
             }
 
             //Possible principle value that could equal this monthly payment
-            float attemptedVal = (endVal + startVal) / 2.0f;
+            double attemptedVal = (endVal + startVal) / 2.0;
 
             //The monthly payment given this principle value
-            float result = calculateMonthlyPayment(months, attemptedVal, principle);
+            double result = calculateMonthlyPayment(months, attemptedVal, principle);
 
             //If the result is less than we want, increase the search
             if (result < desiredVal)
