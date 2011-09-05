@@ -120,6 +120,7 @@
             this.generateSchedule.TabIndex = 11;
             this.generateSchedule.Text = "Generate Schedule";
             this.generateSchedule.UseVisualStyleBackColor = true;
+            this.generateSchedule.Click += new System.EventHandler(this.generateSchedule_Click);
             // 
             // groupBox1
             // 

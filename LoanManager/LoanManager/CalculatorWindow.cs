@@ -208,5 +208,10 @@ namespace LoanManager
         {
 
         }
+
+        private void generateSchedule_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(AmortizationSchedule.getInstance().getSchedule((int)this._numPayments, this._APR, this._principle));
+        }
     }
 }

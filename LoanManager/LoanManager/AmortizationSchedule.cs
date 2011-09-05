@@ -78,11 +78,18 @@ namespace LoanManager
 
             double principleSum = 0;
             int num = 0;
+            /*
             foreach (LoanPayment payment in list)
             {
                 num++;
                 Console.WriteLine("{0}: {1}", num, payment);
                 principleSum += payment.PrinciplePaid;
+            }*/
+
+            for (int i = 0; i < 100; i++)
+            {
+                LoanPayment payment = (LoanPayment)list[i];
+                Console.WriteLine("{0}: {1}", num, payment);
             }
 
             Console.WriteLine("Principle to be paid = {0}", principle);
